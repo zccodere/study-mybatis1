@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zccoder.mybatis1.ch9.action.blob.FileMapper">
+    
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="com.zccoder.mybatis1.ch9.action.blob.FilePO">
+        insert into t_file(file) values(#{file})
+    </insert>
+
+    <select id="findOne" parameterType="int" resultType="com.zccoder.mybatis1.ch9.action.blob.FilePO">
+        select id,file from t_file
+    </select>
+    
+</mapper>
