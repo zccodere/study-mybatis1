@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zccoder.mybatis1.ch5.dynamic.mapper.RoleMapper">
+
+    <resultMap id="roleResultMap" type="com.zccoder.mybatis1.ch4.mappers.po.Role">
+        <id column="id" property="id" javaType="long" jdbcType="BIGINT"/>
+        <result column="role_name" property="roleName" javaType="string" jdbcType="VARCHAR"/>
+        <result column="note" property="note" javaType="string" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="role_columns">
+        id,role_name,note
+    </sql>
+
+    <select id="findRolesByRoleName" parameterType="string" resultMap="roleResultMap">
+        select <include refid="role_columns"/>
+        from t_role
+        <trim prefix="where" prefixOverrides="and">
+            <if test="roleName != null and roleName !=''">
+                and role_name like concat('%',#{roleName},'%')
+            </if>
+        </trim>
+    </select>
+
+    <select id="findRoles" parameterType="role" resultMap="roleResultMap">
+        select <include refid="role_columns"/>
+        from t_role
+        <where>
+            <choose>
+                <when test="id != null">
+                    and id=#{id}
+                </when>
+                <when test="roleName != null and roleName !=''">
+                    and role_name like concat('%',#{roleName},'%')
+                </when>
+                <otherwise>
+                    and note is not null
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+    
+    <update id="update" parameterType="role">
+        update t_role
+        <set>
+            <if test="roleName != null and roleName !=''">
+                role_name = #{roleName},
+            </if>
+            <if test="note != null and note !=''">
+                note = #{note}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="findByIds" resultMap="roleResultMap">
+        select <include refid="role_columns"/>
+        from t_role
+        <where>
+            id in 
+            <foreach collection="ids" item="id" index="index" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+
+    <select id="findRoleByBind" resultMap="roleResultMap">
+        <bind name="pattern" value="'%' + _parameter + '%'"/>
+        select <include refid="role_columns"/>
+        from t_role
+        where role_name like #{pattern}
+    </select>
+
+    <select id="findRoleByBinds" resultMap="roleResultMap">
+        <bind name="pattern_roleName" value="'%' + roleName + '%'"/>
+        <bind name="pattern_note" value="'%' + note + '%'"/>
+        select <include refid="role_columns"/>
+        from t_role
+        where role_name like #{pattern_roleName}
+        and note like #{pattern_note}
+    </select>
+
+</mapper>
