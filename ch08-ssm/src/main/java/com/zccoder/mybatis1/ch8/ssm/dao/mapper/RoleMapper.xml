@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zccoder.mybatis1.ch8.ssm.dao.RoleMapper">
+
+    <resultMap id="baseResultMap" type="com.zccoder.mybatis1.ch8.ssm.dao.po.RolePO">
+        <id column="id" property="id"/>
+        <result column="role_name" property="roleName"/>
+        <result column="create_date" property="createDate"/>
+        <result column="note" property="note"/>
+    </resultMap>
+
+    <sql id="baseQueryColumns">
+        id,role_name,create_date,note
+    </sql>
+    <sql id="baseInsertColumns">
+        role_name,create_date,note
+    </sql>
+
+    <insert id="insert" parameterType="com.zccoder.mybatis1.ch8.ssm.dao.po.RolePO">
+        INSERT INTO t_role(<include refid="baseInsertColumns" />)
+        VALUES (#{roleName},#{createDate},#{note})
+    </insert>
+
+    <update id="update" parameterType="com.zccoder.mybatis1.ch8.ssm.dao.po.RolePO">
+        update t_role
+        <set>
+            <if test="roleName != null">role_name = #{roleName},</if>
+            <if test="note != null">note = #{note}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from t_role where id=#{id}
+    </delete>
+
+    <select id="findOne" parameterType="int" resultType="role">
+        select id,role_name as roleName,note from t_role where id=#{id}
+    </select>
+
+    <select id="list" parameterType="string" resultType="role">
+        select id,role_name as roleName,note from t_role where role_name like concat('%',#{roleName},'%')
+    </select>
+
+</mapper>

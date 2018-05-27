@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    
+    <settings>
+        <!--启用或禁用缓存全局的映射器-->
+        <setting name="cacheEnabled" value="true" />
+        <!--启用或禁用允许数据库自动生成主键-->
+        <setting name="useGeneratedKeys" value="true"/>
+        <!--设置默认执行器（SIMPLE：执行器没有什么特别之处；REUSE：执行器重用预处理语句；BATCH：执行器重用语句和批量更新）-->
+        <setting name="defaultExecutorType" value="REUSE"/>
+        <!--设置超时时间，它决定驱动等待数据库响应的秒数-->
+        <setting name="defaultStatementTimeout" value="25000"/>
+    </settings>
+
+    <!--定义映射器-->
+    <mappers>
+        <!--扫描该包下的所有 Mapper.xml-->
+        <package name="com.zccoder.mybatis1.ch8.ssm.dao.mapper"/>
+    </mappers>
+
+</configuration>
