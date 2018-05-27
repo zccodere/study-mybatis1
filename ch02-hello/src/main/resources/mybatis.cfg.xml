@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+    
+    <!--定义别名-->
+    <typeAliases>
+        <typeAlias alias="role" type="com.zccoder.mybatis1.ch2.hello.po.Role"/>
+    </typeAliases>
+
+    <!--定义数据库信息，默认使用 dev 数据库构建环境-->
+    <environments default="dev">
+        <environment id="dev">
+            <!--采用 JDBC 事务管理-->
+            <transactionManager type="JDBC">
+                <property name="autoCommit" value="false"/>
+            </transactionManager>
+            <!--配置数据库链接信息-->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis1?characterEncoding=utf8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--定义映射器-->
+    <mappers>
+        <!--定义某一个 Mapper.xml-->
+        <!--<mapper resource="com/zccoder/mybatis1/ch1/abstracts/mapper/RoleMapper.xml" />-->
+        <!--扫描该包下的所有 Mapper.xml-->
+        <package name="com.zccoder.mybatis1.ch2.hello.mapper"/>
+    </mappers>
+
+</configuration>
