@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--MyBatis 的 properties 元素-->
+    <!--参考官方文档地址【http://www.mybatis.org/mybatis-3/zh/configuration.html#properties】-->
+
+    <!--properties 是一个配置属性的元素，以便在上下文中使用它。MyBatis 提供三种配置方式及优先级如下-->
+
+    <!--properties 元素中 property 子元素【低优先级】-->
+    <!--properties 配置文件【中优先级】【推荐使用】-->
+    <!--程序参数传递【高优先级】-->
+
+    <!--【方式一】配置元素，以便在上下文中使用配置好的属性值-->
+    <properties>
+        <property name="driver" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/mybatis1?characterEncoding=utf8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </properties>
+
+    <!--【方式二】引入配置文件-->
+    <!--<properties resource="jdbc.properties"/>-->
+
+    <!--【方式三】通过程序参数传递-->
+    <!--参考类【com.zccoder.mybatis1.ch3.config.PropertiesDemo】-->
+
+    <environments default="dev">
+        <environment id="dev">
+            <transactionManager type="JDBC">
+                <property name="autoCommit" value="false"/>
+            </transactionManager>
+            <dataSource type="POOLED">
+                <!--在配置文件中使用配置参数-->
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+</configuration>

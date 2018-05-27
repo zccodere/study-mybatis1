@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zccoder.mybatis1.ch3.config.mapper.UserMapper">
+
+    <resultMap id="userMap" type="com.zccoder.mybatis1.ch3.config.po.User">
+        <!--定义结果类型转化器标识，才能使用类型转换器-->
+        <id column="id" property="id" javaType="long" jdbcType="BIGINT"/>
+
+        <result column="user_name" property="userName"/>
+        <result column="cnname" property="cnname"/>
+        <result column="birthday" property="birthday"/>
+        <result column="sex" property="sex" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
+        <result column="email" property="email"/>
+        <result column="mobile" property="mobile"/>
+        <result column="note" property="note"/>
+    </resultMap>
+
+    <select id="getUser" parameterType="Long" resultMap="userMap">
+        select id,user_name,cnname,birthday,sex,email,mobile,note from t_user where id=#{id}
+    </select>
+
+    <insert id="insertUser" parameterType="com.zccoder.mybatis1.ch3.config.po.User">
+        insert into t_user(user_name,cnname,birthday,sex,email,mobile,note) values (#{userName},#{cnname},#{birthday},#{sex,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},#{email},#{mobile},#{note})
+    </insert>
+
+</mapper>

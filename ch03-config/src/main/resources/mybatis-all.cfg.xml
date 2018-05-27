@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--MyBatis 的全部配置元素-->
+    <!--参考官方文档地址【http://www.mybatis.org/mybatis-3/zh/configuration.html】-->
+
+    <!--MyBatis 配置 xml 文件的层次结构-->
+    <!--【注意】这些层次结构是不能够颠倒顺序的-->
+
+    <!--属性-->
+    <properties />
+    <!--设置-->
+    <settings><setting name="" value="" /></settings>
+    <!--类型命名-->
+    <typeAliases />
+    <!--类型处理器-->
+    <typeHandlers />
+    <!--对象工厂-->
+    <objectFactory type="" />
+    <!--插件-->
+    <plugins><plugin interceptor="" /></plugins>
+    <!--环境配置-->
+    <environments default="">
+        <!--环境变量-->
+        <environment id="">
+            <!--事务管理器-->
+            <transactionManager type=""/>
+            <!--数据源-->
+            <dataSource type=""/>
+        </environment>
+    </environments>
+    <!--数据库厂商标识-->
+    <databaseIdProvider type=""/>
+    <!--映射器-->
+    <mappers>
+        <mapper resource="" />
+    </mappers>
+</configuration>

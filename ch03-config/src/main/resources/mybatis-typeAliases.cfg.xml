@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--MyBatis 的 typeAliases 元素-->
+    <!--参考官方文档地址【http://www.mybatis.org/mybatis-3/zh/configuration.html#typeAliases】-->
+
+    <!--【方式一】定义别名-->
+    <!--<typeAliases>-->
+        <!--<typeAlias type="com.zccoder.mybatis1.ch3.config.po.Role" alias="role"/>-->
+    <!--</typeAliases>-->
+
+    <!--【方式二】自动扫描-->
+    <typeAliases>
+        <package name="com.zccoder.mybatis1.ch3.config.po"/>
+        <!--【说明】使用自动扫描时，对应的 PO 类可以使用 @Alias 注解指定别名。当没有使用 @Alias 指定别名时，默认为类名首字母小写-->
+        <!--参考类【com.zccoder.mybatis1.ch3.config.po.Role】-->
+    </typeAliases>
+
+</configuration>
