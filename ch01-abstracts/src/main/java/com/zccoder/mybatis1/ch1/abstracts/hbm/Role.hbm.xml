@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.zccoder.mybatis1.ch1.abstracts.po.Role" table="t_role" schema="mybatis1">
+        <id name="id" column="id"/>
+        <property name="roleName" column="role_name"/>
+        <property name="note" column="note"/>
+    </class>
+
+</hibernate-mapping>
