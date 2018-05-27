@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zccoder.mybatis1.ch4.mappers.mapper.RoleMapper">
+
+    <resultMap id="roleMap" type="com.zccoder.mybatis1.ch4.mappers.po.Role">
+        <id column="id" property="id" javaType="long" jdbcType="BIGINT"/>
+        <result column="role_name" property="roleName" javaType="string" jdbcType="VARCHAR"/>
+        <result column="note" property="note" javaType="string" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="role_columns">
+        id,role_name,note
+    </sql>
+
+    <select id="getRole" parameterType="Long" resultType="com.zccoder.mybatis1.ch4.mappers.po.Role">
+        select id,role_name as roleName,note from t_role where id=#{id}
+    </select>
+
+    <select id="findRoleByMap" parameterType="map" resultMap="roleMap">
+        select <include refid="role_columns"/> from t_role
+        where role_name like concat('%',#{roleName},'%')
+        and note like concat('%',#{note},'%')
+    </select>
+
+    <select id="findRoleByAnnotation" resultMap="roleMap">
+        select id,role_name,note from t_role
+        where role_name like concat('%',#{roleName},'%')
+        and note like concat('%',#{note},'%')
+    </select>
+
+    <select id="findRoleByParams" parameterType="com.zccoder.mybatis1.ch4.mappers.po.Role" resultMap="roleMap">
+        select id,role_name,note from t_role
+        where role_name like concat('%',#{roleName},'%')
+        and note like concat('%',#{note},'%')
+    </select>
+
+    <insert id="insert" parameterType="role" useGeneratedKeys="true" keyProperty="id">
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            select if(max(id) is null,1,max(id)+2) as newId from t_role
+        </selectKey>
+        insert into t_role(role_name, note) value (#{roleName},#{note})
+    </insert>
+
+    <update id="update" parameterType="role">
+        update t_role set role_name=#{roleName},note=#{note}
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="Long">
+        delete from t_role where id=#{id}
+    </delete>
+
+</mapper>
