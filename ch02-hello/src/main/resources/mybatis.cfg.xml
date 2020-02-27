@@ -3,11 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    
+
     <settings>
-        <setting name="logImpl" value="LOG4J"/>
+        <setting name="logImpl" value="LOG4J2"/>
     </settings>
-    
+
     <!--定义别名-->
     <typeAliases>
         <typeAlias alias="role" type="com.zccoder.mybatis1.ch2.hello.po.Role"/>

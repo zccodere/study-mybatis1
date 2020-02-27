@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- status:log4j内部console日志级别,monitorInterval:自动更新配置(单位:秒) -->
+<configuration status="error" monitorInterval="3600">
+    <!--自定义一些常量，之后使用${变量名}引用-->
+    <properties>
+        <Property name="baseDir">./</Property>
+    </properties>
+    <!--appender:定义输出内容,输出格式,输出方式,日志保存策略等,常用其下三种标签[console,File,RollingRandomAccessFile]-->
+    <!--Appender可以理解为日志的输出目的地-->
+    <appenders>
+        <!-- 标准console输出 -->
+        <Console name="stdOut" target="SYSTEM_OUT">
+            <PatternLayout pattern="%c{1} %d{yyyy-MM-dd HH:mm:ss SSS} [%t] %T %-5p %m%n"/>
+        </Console>
+    </appenders>
+
+    <!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
+    <loggers>
+        <Root level="debug">
+            <AppenderRef ref="stdOut"/>
+        </Root>
+        <Logger name="com.zccoder.mybatis1" level="debug" additivity="false">
+            <AppenderRef ref="stdOut"/>
+        </Logger>
+    </loggers>
+</configuration>
